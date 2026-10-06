@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Palo Coffee Old Town · Ipoh</title>
+  <meta name="description" content="Palo Coffee Old Town — a warm, wood-lined coffee shop at 34 Market Lane, Ipoh. Ipoh white coffee, signature lattes, fresh-baked croissants and pastries from RM7. Rated 4.9 on Google. Open 9am–6pm, closed Thursdays." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #2b2018;
+      --ink-soft: #4a3a2e;
+      --muted: #6e5e51;
+      --paper: #f6efe4;
+      --cream: #fbf7f0;
+      --line: #e3d6c3;
+      --wood: #7a4a2b;
+      --wood-deep: #5a3420;
+      --wood-dark: #2e1f16;
+      --amber: #d99a3e;
+      --amber-soft: #f3d9a8;
+      --leaf: #4f6b4a;
+      --leaf-deep: #3b5238;
+      --radius: 20px;
+      --shadow: 0 24px 48px -28px rgba(46, 31, 22, .5);
+      --font-display: "DM Serif Display", Georgia, "Times New Roman", serif;
+      --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --ease: cubic-bezier(.22, .61, .36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    a { color: inherit; }
+    img, svg { display: block; }
+    :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 8px; }
+    .wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+    .icon { width: 20px; height: 20px; flex-shrink: 0; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.06; margin: 0; letter-spacing: -.01em; }
+    h2 { font-size: clamp(2.1rem, 4.6vw, 3.2rem); text-wrap: balance; }
+    h1 em, h2 em { font-style: italic; color: var(--wood); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .76rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--leaf);
+    }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: currentColor; }
+    section { padding: clamp(72px, 10vw, 120px) 0; }
+    .section-head { max-width: 640px; margin-bottom: 48px; }
+    .section-head p { color: var(--muted); margin: 16px 0 0; font-size: 1.06rem; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 50px; padding: 0 24px; border-radius: 999px;
+      font: 600 .98rem/1 var(--font-body); text-decoration: none; cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--wood); color: #fff; }
+    .btn-primary:hover { background: var(--wood-deep); }
+    .btn-ghost { border-color: var(--ink); color: var(--ink); }
+    .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(246, 239, 228, .88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent; transition: border-color .2s var(--ease);
+    }
+    .nav.scrolled { border-bottom-color: var(--line); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--wood-dark); color: var(--amber-soft);
+      display: grid; place-items: center; font: italic 1.35rem/1 var(--font-display);
+    }
+    .brand-name { font-family: var(--font-display); font-size: 1.35rem; line-height: 1; }
+    .brand-name small { display: block; font: 600 .66rem/1.4 var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
+    .nav-links a {
+      display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px;
+      text-decoration: none; font-weight: 500; font-size: .95rem; color: var(--ink-soft);
+      transition: background-color .2s var(--ease), color .2s var(--ease);
+    }
+    .nav-links a:hover { background: var(--cream); color: var(--ink); }
+    .nav-cta { min-height: 44px; padding: 0 18px; font-size: .92rem; }
+    .menu-toggle {
+      display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line);
+      background: var(--cream); color: var(--ink); cursor: pointer; place-items: center;
+    }
+
+    /* Hero */
+    .hero { padding: clamp(40px, 7vw, 88px) 0 clamp(64px, 9vw, 110px); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+    .hero h1 { font-size: clamp(2.9rem, 7vw, 5.3rem); margin: 22px 0 22px; text-wrap: balance; }
+    .hero-lede { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--ink-soft); max-width: 520px; margin: 0 0 32px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-facts { display: flex; flex-wrap: wrap; gap: 28px; margin: 40px 0 0; padding: 26px 0 0; border-top: 1px solid var(--line); }
+    .fact dt { font-size: .74rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .fact dd { margin: 4px 0 0; font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; display: flex; align-items: center; gap: 6px; }
+    .fact dd .stars { display: inline-flex; gap: 1px; color: var(--amber); }
+    .fact dd .stars svg { width: 15px; height: 15px; }
+
+    .hero-art {
+      position: relative; aspect-ratio: 4 / 5; border-radius: 220px 220px var(--radius) var(--radius);
+      overflow: hidden; box-shadow: var(--shadow);
+      background:
+        radial-gradient(120% 70% at 50% 18%, rgba(243, 217, 168, .55), transparent 60%),
+        repeating-linear-gradient(90deg, #6b3f24 0 34px, #74462a 34px 36px, #5f3820 36px 70px, #6a3e23 70px 72px);
+    }
+    .hero-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-badge {
+      position: absolute; left: -18px; bottom: 36px; background: var(--cream); border-radius: 16px;
+      padding: 14px 18px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px; max-width: 250px;
+    }
+    .hero-badge .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--leaf); flex-shrink: 0; box-shadow: 0 0 0 4px rgba(79, 107, 74, .18); }
+    .hero-badge .dot.closed { background: #a0533a; box-shadow: 0 0 0 4px rgba(160, 83, 58, .18); }
+    .hero-badge strong { display: block; font-size: .95rem; }
+    .hero-badge span { font-size: .84rem; color: var(--muted); }
+    .hero-art-wrap { position: relative; }
+
+    /* Signatures */
+    .signatures { background: var(--cream); border-block: 1px solid var(--line); }
+    .sig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .sig-card {
+      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 30px 28px; display: flex; flex-direction: column; gap: 14px;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .sig-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .sig-icon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: var(--wood-dark); color: var(--amber-soft); }
+    .sig-icon svg { width: 26px; height: 26px; }
+    .sig-card h3 { font-size: 1.6rem; }
+    .sig-card p { margin: 0; color: var(--muted); }
+    .sig-card .price { margin-top: auto; padding-top: 10px; font-weight: 700; color: var(--wood); font-size: .95rem; }
+
+    /* Menu */
+    .menu-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+    .menu-head .section-head { margin-bottom: 0; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tab {
+      min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid var(--line);
+      background: transparent; color: var(--ink-soft); font: 600 .92rem/1 var(--font-body); cursor: pointer;
+      transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+    }
+    .tab:hover { border-color: var(--wood); color: var(--ink); }
+    .tab[aria-selected="true"] { background: var(--wood-dark); border-color: var(--wood-dark); color: var(--cream); }
+    .menu-panel { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(24px, 4vw, 44px); }
+    .menu-panel[hidden] { display: none; }
+    .panel-intro { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; margin-bottom: 18px; }
+    .panel-intro h3 { font-size: clamp(1.7rem, 3vw, 2.1rem); }
+    .panel-intro p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .menu-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
+    .menu-item { padding: 18px 0; border-bottom: 1px dashed var(--line); }
+    .menu-row { display: flex; align-items: baseline; gap: 12px; }
+    .menu-row .name { font-weight: 600; font-size: 1.05rem; }
+    .menu-row .leader { flex: 1; border-bottom: 1px dotted #c9b79e; transform: translateY(-4px); min-width: 20px; }
+    .menu-row .price { font-weight: 700; color: var(--wood); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .menu-item .desc { margin: 4px 0 0; font-size: .92rem; color: var(--muted); }
+    .menu-note { margin: 22px 0 0; font-size: .88rem; color: var(--muted); }
+
+    /* Space */
+    .space { background: var(--wood-dark); color: var(--cream); position: relative; overflow: hidden; }
+    .space::before {
+      content: ""; position: absolute; inset: 0; opacity: .5; pointer-events: none;
+      background: radial-gradient(60% 50% at 85% 0%, rgba(217, 154, 62, .35), transparent 70%);
+    }
+    .space .wrap { position: relative; }
+    .space .eyebrow { color: var(--amber-soft); }
+    .space h2 em { color: var(--amber); }
+    .space .section-head p { color: #d8c8b4; }
+    .space-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+    .space-item { border-top: 1px solid rgba(251, 247, 240, .18); padding-top: 22px; }
+    .space-item svg { width: 28px; height: 28px; color: var(--amber); margin-bottom: 14px; }
+    .space-item h3 { font-size: 1.45rem; margin-bottom: 8px; }
+    .space-item p { margin: 0; color: #d8c8b4; }
+    .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .quote {
+      margin: 0; background: rgba(251, 247, 240, .06); border: 1px solid rgba(251, 247, 240, .12);
+      border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; gap: 18px;
+    }
+    .quote .stars { display: flex; gap: 2px; color: var(--amber); }
+    .quote .stars svg { width: 16px; height: 16px; }
+    .quote blockquote { margin: 0; font-family: var(--font-display); font-size: 1.28rem; line-height: 1.35; }
+    .quote figcaption { margin-top: auto; font-size: .88rem; color: #bfae98; }
+    .quote figcaption strong { color: var(--cream); font-weight: 600; }
+    .rating-strip { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; color: #d8c8b4; font-size: .95rem; }
+    .rating-strip strong { font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--cream); }
+    .rating-strip a { color: var(--amber-soft); font-weight: 600; text-underline-offset: 4px; }
+
+    /* Visit */
+    .visit-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 56px); align-items: stretch; }
+    .visit-card { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(24px, 4vw, 40px); }
+    .visit-block + .visit-block { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .visit-block h3 { font-size: 1.4rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .visit-block h3 svg { color: var(--wood); }
+    .visit-block address { font-style: normal; color: var(--ink-soft); }
+    .hours { width: 100%; border-collapse: collapse; font-size: .97rem; }
+    .hours th, .hours td { padding: 9px 12px; text-align: left; }
+    .hours td { text-align: right; font-variant-numeric: tabular-nums; }
+    .hours tr { border-bottom: 1px solid var(--line); }
+    .hours tr:last-child { border-bottom: 0; }
+    .hours th { font-weight: 500; }
+    .hours tr.closed td { color: #a0533a; font-weight: 600; }
+    .hours tr.today { background: var(--amber-soft); }
+    .hours tr.today th, .hours tr.today td { font-weight: 700; }
+    .hours tr.today th::after { content: "Today"; margin-left: 8px; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; background: var(--wood-dark); color: var(--cream); padding: 3px 7px; border-radius: 999px; vertical-align: 2px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); font-size: .85rem; font-weight: 500; }
+    .chip svg { width: 15px; height: 15px; color: var(--leaf); }
+    .visit-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); min-height: 420px; background: var(--line); }
+    .map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; display: block; }
+
+    /* Follow */
+    .follow { padding-top: 0; }
+    .follow-card {
+      background: var(--leaf-deep); color: var(--cream); border-radius: calc(var(--radius) + 8px);
+      padding: clamp(32px, 6vw, 64px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 32px; align-items: center;
+    }
+    .follow-card h2 em { color: var(--amber-soft); }
+    .follow-card p { color: #d6e0d2; margin: 14px 0 0; max-width: 480px; }
+    .socials { display: flex; flex-direction: column; gap: 12px; }
+    .social {
+      display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 12px 18px; border-radius: 16px;
+      background: rgba(251, 247, 240, .1); border: 1px solid rgba(251, 247, 240, .18);
+      text-decoration: none; transition: background-color .2s var(--ease);
+    }
+    .social:hover { background: rgba(251, 247, 240, .18); }
+    .social svg.brand-ic { width: 26px; height: 26px; }
+    .social span { display: flex; flex-direction: column; line-height: 1.3; }
+    .social small { color: #c8d4c4; font-size: .84rem; }
+    .social strong { font-weight: 600; }
+    .social .arrow { margin-left: auto; width: 18px; height: 18px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--line); padding: 36px 0; font-size: .9rem; color: var(--muted); }
+    .foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .foot nav { display: flex; gap: 6px; flex-wrap: wrap; }
+    .foot nav a { text-decoration: none; padding: 8px 10px; border-radius: 8px; }
+    .foot nav a:hover { background: var(--cream); color: var(--ink); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    .steam path { animation: steam 4s ease-in-out infinite; }
+    .steam path:nth-child(2) { animation-delay: .8s; }
+    .steam path:nth-child(3) { animation-delay: 1.6s; }
+    @keyframes steam { 0%, 100% { opacity: .25; transform: translateY(6px); } 50% { opacity: .8; transform: translateY(-6px); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .steam path { animation: none; opacity: .6; }
+      .sig-card, .btn { transition: none; }
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid, .visit-grid, .follow-card { grid-template-columns: 1fr; }
+      .hero-art-wrap { max-width: 460px; margin-inline: auto; width: 100%; }
+      .sig-grid, .space-grid, .quotes { grid-template-columns: 1fr; }
+      .menu-list { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 820px) {
+      .menu-toggle { display: grid; }
+      .nav-links {
+        position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 2px;
+        background: var(--paper); border-bottom: 1px solid var(--line); padding: 10px 16px 18px;
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { min-height: 48px; }
+      .nav-cta { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero-actions .btn { flex: 1 1 100%; }
+      .hero-badge { left: 12px; right: 12px; max-width: none; bottom: 16px; }
+      .hero-facts { gap: 20px; }
+      .map, .map iframe { min-height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3.5c0 1.5 1.5 1.5 1.5 3M12 3.5c0 1.5 1.5 1.5 1.5 3"/></g></symbol>
+    <symbol id="i-croissant" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 15.5C3 12 5 7.5 9 6l3 9-7.5.5z"/><path d="M19.5 15.5C21 12 19 7.5 15 6l-3 9 7.5.5z"/><path d="M9 6c1-.6 2-.8 3-.8s2 .2 3 .8"/></g></symbol>
+    <symbol id="i-glass" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12l-1.5 16h-9z"/><path d="M6.5 9h11"/><circle cx="11" cy="13" r=".6" fill="currentColor"/><circle cx="13.5" cy="16" r=".6" fill="currentColor"/><path d="M14 4l2-2"/></g></symbol>
+    <symbol id="i-wood" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/><path d="M5.5 9c.8-.6 1.6-.6 2 0M17.5 14c.8-.6 1.6-.6 2 0"/></g></symbol>
+    <symbol id="i-lamp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v5"/><path d="M6 13a6 6 0 0 1 12 0z"/><path d="M10 16.5a2 2 0 0 0 4 0"/><path d="M4 19l1.5-1M20 19l-1.5-1M12 21v-1"/></g></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19l8-8"/></g></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></g></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </svg>
+
+  <header class="nav" id="top">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Palo Coffee Old Town, back to top">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-name">Palo Coffee<small>Old Town · Ipoh</small></span>
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#signatures">Signatures</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#space">The Space</a></li>
+          <li><a href="#visit">Visit</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-primary nav-cta" href="https://maps.app.goo.gl/EY53wrrGX2tQPQZz5" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Get directions
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">Market Lane · Ipoh Old Town</span>
+          <h1>Ipoh white coffee, <em>warm light</em> &amp; fresh croissants.</h1>
+          <p class="hero-lede">A small wood-lined coffee shop tucked into Ipoh's Old Town. Pull up a seat for a smooth signature latte, a fizzy americano, and a pastry warmed straight from the oven.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#menu">See the menu</a>
+            <a class="btn btn-ghost" href="https://maps.app.goo.gl/EY53wrrGX2tQPQZz5" target="_blank" rel="noopener">
+              <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Get directions
+            </a>
+          </div>
+          <dl class="hero-facts">
+            <div class="fact">
+              <dt>Google rating</dt>
+              <dd>4.9
+                <span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+                <span class="sr-only">out of 5 from 68 reviews</span>
+              </dd>
+            </div>
+            <div class="fact"><dt>Open</dt><dd>9am – 6pm</dd></div>
+            <div class="fact"><dt>Per person</dt><dd>RM 1 – 20</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero-art-wrap reveal">
+          <div class="hero-art">
+            <svg viewBox="0 0 400 500" role="img" aria-label="Illustration of a cup of white coffee and a croissant on a wooden counter under a warm pendant lamp">
+              <!-- pendant lamp -->
+              <line x1="200" y1="0" x2="200" y2="86" stroke="#2e1f16" stroke-width="3"/>
+              <path d="M160 120 Q200 70 240 120 Z" fill="#2e1f16"/>
+              <ellipse cx="200" cy="121" rx="40" ry="6" fill="#f3d9a8"/>
+              <path d="M162 124 L96 330 L304 330 L238 124 Z" fill="#f3d9a8" opacity=".14"/>
+              <!-- counter -->
+              <rect x="0" y="360" width="400" height="140" fill="#3a2418"/>
+              <rect x="0" y="352" width="400" height="14" rx="2" fill="#8a5632"/>
+              <rect x="0" y="366" width="400" height="4" fill="#2e1f16" opacity=".5"/>
+              <!-- plant -->
+              <g transform="translate(318 276)">
+                <path d="M6 40 h40 l-5 36 h-30z" fill="#c9b79e"/>
+                <path d="M26 40 C10 20 0 8 2 -8 C16 4 24 18 26 40" fill="#4f6b4a"/>
+                <path d="M26 40 C34 14 46 4 58 0 C54 18 42 32 26 40" fill="#5f7d58"/>
+                <path d="M26 40 C24 18 28 0 30 -20 C38 -2 36 22 26 40" fill="#3b5238"/>
+              </g>
+              <!-- saucer + cup -->
+              <ellipse cx="170" cy="352" rx="78" ry="12" fill="#efe5d4"/>
+              <ellipse cx="170" cy="349" rx="78" ry="10" fill="#fbf7f0"/>
+              <path d="M110 268 h120 v34 a50 48 0 0 1 -50 48 h-20 a50 48 0 0 1 -50 -48z" fill="#fbf7f0"/>
+              <path d="M230 282 h12 a18 18 0 0 1 0 36 h-14" fill="none" stroke="#fbf7f0" stroke-width="9"/>
+              <ellipse cx="170" cy="268" rx="60" ry="10" fill="#c99a68"/>
+              <ellipse cx="170" cy="268" rx="46" ry="6" fill="#e2bf91"/>
+              <path d="M110 300 h120" stroke="#7a4a2b" stroke-width="3" opacity=".35"/>
+              <!-- steam -->
+              <g class="steam" fill="none" stroke="#fbf7f0" stroke-width="4" stroke-linecap="round" opacity=".7">
+                <path d="M150 248 c-10 -14 10 -22 0 -40"/>
+                <path d="M172 244 c-10 -16 12 -24 0 -46"/>
+                <path d="M194 248 c-10 -14 10 -22 0 -40"/>
+              </g>
+              <!-- croissant -->
+              <g transform="translate(240 322)">
+                <path d="M2 28 C0 10 16 -2 36 2 C56 -2 72 10 70 28 C58 24 50 30 36 30 C22 30 14 24 2 28z" fill="#d99a3e"/>
+                <path d="M20 4 C24 14 24 22 22 30 M36 2 V30 M52 4 C48 14 48 22 50 30" stroke="#a8682a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="hero-badge" id="status-badge" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span>
+            <span><strong>Open daily 9am – 6pm</strong><span>Closed on Thursdays</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signatures -->
+    <section class="signatures" id="signatures">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">What to order</span>
+          <h2>Three reasons people <em>keep coming back</em>.</h2>
+          <p>Ipoh is a white coffee town, and Palo gives it a modern twist. Here's where to start.</p>
+        </div>
+        <div class="sig-grid">
+          <article class="sig-card reveal">
+            <span class="sig-icon" aria-hidden="true"><svg><use href="#i-cup"/></svg></span>
+            <h3>Signature Latte</h3>
+            <p>Balanced, smooth and rich. The house favourite. For something more indulgent, go for the creamy Tiramisu Latte.</p>
+            <span class="price">From RM 11.00</span>
+          </article>
+          <article class="sig-card reveal">
+            <span class="sig-icon" aria-hidden="true"><svg><use href="#i-croissant"/></svg></span>
+            <h3>Palo's Pastry</h3>
+            <p>Buttery croissants, ribbon and pistachio mochi bakes, truffle mushroom and pesto chicken sausage, all warmed in the oven before serving.</p>
+            <span class="price">From RM 9.80</span>
+          </article>
+          <article class="sig-card reveal">
+            <span class="sig-icon" aria-hidden="true"><svg><use href="#i-glass"/></svg></span>
+            <h3>Fruity Americanos</h3>
+            <p>Berries Americano is tangy and refreshing. Sunrise Americano is bright and citrusy. Both are made for Ipoh's afternoon heat.</p>
+            <span class="price">RM 10.00</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu">
+      <div class="wrap">
+        <div class="menu-head">
+          <div class="section-head reveal">
+            <span class="eyebrow">The menu</span>
+            <h2>Honest prices, <em>made with care</em>.</h2>
+          </div>
+          <div class="tabs reveal" role="tablist" aria-label="Menu categories">
+            <button class="tab" role="tab" id="tab-coffee" aria-controls="panel-coffee" aria-selected="true">Coffee Bar</button>
+            <button class="tab" role="tab" id="tab-pastry" aria-controls="panel-pastry" aria-selected="false" tabindex="-1">Pastry</button>
+            <button class="tab" role="tab" id="tab-signature" aria-controls="panel-signature" aria-selected="false" tabindex="-1">Palo Signature</button>
+            <button class="tab" role="tab" id="tab-soda" aria-controls="panel-soda" aria-selected="false" tabindex="-1">Soda &amp; Fizz</button>
+          </div>
+        </div>
+
+        <div class="menu-panel reveal" role="tabpanel" id="panel-coffee" aria-labelledby="tab-coffee">
+          <div class="panel-intro"><h3>Coffee Bar</h3><p>Iced or hot, made to order</p></div>
+          <ul class="menu-list">
+            <li class="menu-item"><div class="menu-row"><span class="name">Iced Americano</span><span class="leader"></span><span class="price">RM 7.00</span></div><p class="desc">Clean, bold, lightly bitter</p></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Signature Latte</span><span class="leader"></span><span class="price">RM 11.00</span></div><p class="desc">Balanced, smooth, rich</p></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Berries Americano</span><span class="leader"></span><span class="price">RM 10.00</span></div><p class="desc">Tangy, fruity, refreshing</p></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Sunrise Americano</span><span class="leader"></span><span class="price">RM 10.00</span></div><p class="desc">Bright, slightly sweet, citrusy</p></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Tiramisu Latte</span><span class="leader"></span><span class="price">RM 15.00</span></div><p class="desc">Rich, creamy, indulgent</p></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Iced Double Chocolate</span><span class="leader"></span><span class="price">RM 13.00</span></div><p class="desc">Rich, milky, cacao</p></li>
+          </ul>
+        </div>
+
+        <div class="menu-panel" role="tabpanel" id="panel-pastry" aria-labelledby="tab-pastry" hidden>
+          <div class="panel-intro"><h3>Palo's Pastry</h3><p>Warmed in the oven before serving</p></div>
+          <ul class="menu-list">
+            <li class="menu-item"><div class="menu-row"><span class="name">Croissant</span><span class="leader"></span><span class="price">RM 9.80</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Apple Danish</span><span class="leader"></span><span class="price">RM 9.80</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Ribbon Croissant</span><span class="leader"></span><span class="price">RM 13.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Hazelnut Choco Chip Cookie Croissant</span><span class="leader"></span><span class="price">RM 13.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Mochi Pistachio</span><span class="leader"></span><span class="price">RM 13.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Truffle Mushroom</span><span class="leader"></span><span class="price">RM 13.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Chicken Ham &amp; Cheese Croissant</span><span class="leader"></span><span class="price">RM 13.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Chicken Sausage with Pesto</span><span class="leader"></span><span class="price">RM 15.00</span></div></li>
+          </ul>
+        </div>
+
+        <div class="menu-panel" role="tabpanel" id="panel-signature" aria-labelledby="tab-signature" hidden>
+          <div class="panel-intro"><h3>Palo Signature</h3><p>Ipoh-style white coffee &amp; kopitiam classics</p></div>
+          <ul class="menu-list">
+            <li class="menu-item"><div class="menu-row"><span class="name">2in1 White Coffee (Sugar-free)</span><span class="leader"></span><span class="price">RM 7.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">3in1 White Coffee Kaw</span><span class="leader"></span><span class="price">RM 10.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">3in1 Chocolate</span><span class="leader"></span><span class="price">RM 11.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">3in1 Cham</span><span class="leader"></span><span class="price">RM 13.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">3in1 Teh Tarik</span><span class="leader"></span><span class="price">RM 15.00</span></div></li>
+          </ul>
+        </div>
+
+        <div class="menu-panel" role="tabpanel" id="panel-soda" aria-labelledby="tab-soda" hidden>
+          <div class="panel-intro"><h3>Soda &amp; Fizz</h3><p>Everything RM 7.00</p></div>
+          <ul class="menu-list">
+            <li class="menu-item"><div class="menu-row"><span class="name">Orange</span><span class="leader"></span><span class="price">RM 7.00</span></div><p class="desc">Sweet, citrus, bubbly</p></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Blue Lemon</span><span class="leader"></span><span class="price">RM 7.00</span></div><p class="desc">Fizzy, zesty, refreshing</p></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Triple Berries</span><span class="leader"></span><span class="price">RM 7.00</span></div><p class="desc">Sweet, tart, fruity</p></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Passion Fruit</span><span class="leader"></span><span class="price">RM 7.00</span></div></li>
+            <li class="menu-item"><div class="menu-row"><span class="name">Peach</span><span class="leader"></span><span class="price">RM 7.00</span></div></li>
+          </ul>
+        </div>
+
+        <p class="menu-note">Prices in Malaysian Ringgit. Menu and availability may change, so please check at the counter.</p>
+      </div>
+    </section>
+
+    <!-- The Space -->
+    <section class="space" id="space">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">The space</span>
+          <h2>Wood, warm light, <em>and a slower pace</em>.</h2>
+          <p>Guests say they first notice the room: timber everywhere, soft lamps and a few plants. It's a calm spot to stop between Old Town's lanes.</p>
+        </div>
+        <div class="space-grid">
+          <div class="space-item reveal">
+            <svg aria-hidden="true"><use href="#i-wood"/></svg>
+            <h3>Wooden interior</h3>
+            <p>Warm timber tones from the counter to the walls, with a vintage feel.</p>
+          </div>
+          <div class="space-item reveal">
+            <svg aria-hidden="true"><use href="#i-lamp"/></svg>
+            <h3>Warm lighting</h3>
+            <p>Soft, golden light that makes every corner cosy and good for photos.</p>
+          </div>
+          <div class="space-item reveal">
+            <svg aria-hidden="true"><use href="#i-leaf"/></svg>
+            <h3>A touch of nature</h3>
+            <p>Greenery throughout, so the room feels relaxing instead of rushed.</p>
+          </div>
+        </div>
+
+        <div class="quotes">
+          <figure class="quote reveal">
+            <div class="stars" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></div>
+            <blockquote>“The cafe environment is really beautiful and relaxing.”</blockquote>
+            <figcaption><strong>Mary Loo</strong> · Google review</figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <div class="stars" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></div>
+            <blockquote>“Delicious coffee and fresh pastries.”</blockquote>
+            <figcaption><strong>Clo</strong> · Google review</figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <div class="stars" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></div>
+            <blockquote>“Lovely coffee shop … plus the price is reasonable.”</blockquote>
+            <figcaption><strong>Alif Rad</strong> · Google review</figcaption>
+          </figure>
+        </div>
+
+        <div class="rating-strip reveal">
+          <strong>4.9</strong>
+          <span>average from 68 Google reviews</span>
+          <a href="https://maps.app.goo.gl/EY53wrrGX2tQPQZz5" target="_blank" rel="noopener">Read all reviews</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visit -->
+    <section id="visit">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Visit us</span>
+          <h2>Find us on <em>Market Lane</em>.</h2>
+          <p>In the middle of Ipoh Old Town, a short walk from the city's heritage streets.</p>
+        </div>
+        <div class="visit-grid">
+          <div class="visit-card reveal">
+            <div class="visit-block">
+              <h3><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Address</h3>
+              <address>34, Market Lane,<br />30000 Ipoh, Perak, Malaysia</address>
+              <div class="chips">
+                <span class="chip"><svg aria-hidden="true"><use href="#i-check"/></svg>Dine-in</span>
+                <span class="chip"><svg aria-hidden="true"><use href="#i-check"/></svg>Takeaway</span>
+                <span class="chip"><svg aria-hidden="true"><use href="#i-check"/></svg>RM 1–20 per person</span>
+              </div>
+              <div class="visit-actions">
+                <a class="btn btn-primary" href="https://maps.app.goo.gl/EY53wrrGX2tQPQZz5" target="_blank" rel="noopener">
+                  <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Open in Google Maps
+                </a>
+              </div>
+            </div>
+            <div class="visit-block">
+              <h3><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Opening hours</h3>
+              <table class="hours" id="hours">
+                <caption class="sr-only">Weekly opening hours</caption>
+                <tbody>
+                  <tr data-day="1"><th scope="row">Monday</th><td>9:00am – 6:00pm</td></tr>
+                  <tr data-day="2"><th scope="row">Tuesday</th><td>9:00am – 6:00pm</td></tr>
+                  <tr data-day="3"><th scope="row">Wednesday</th><td>9:00am – 6:00pm</td></tr>
+                  <tr data-day="4" class="closed"><th scope="row">Thursday</th><td>Closed</td></tr>
+                  <tr data-day="5"><th scope="row">Friday</th><td>9:00am – 6:00pm</td></tr>
+                  <tr data-day="6"><th scope="row">Saturday</th><td>9:00am – 6:00pm</td></tr>
+                  <tr data-day="0"><th scope="row">Sunday</th><td>9:00am – 6:00pm</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="map reveal">
+            <iframe title="Map showing Palo Coffee Old Town at 34 Market Lane, Ipoh" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Palo+Coffee+Old+Town,+34+Market+Ln,+30000+Ipoh,+Perak&z=17&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Follow -->
+    <section class="follow">
+      <div class="wrap">
+        <div class="follow-card reveal">
+          <div>
+            <span class="eyebrow" style="color:var(--amber-soft)">Stay in the loop</span>
+            <h2 style="margin-top:14px">New bakes and seasonal drinks, <em>first on our socials</em>.</h2>
+            <p>Follow Palo for fresh pastry drops, new drinks and a look inside the shop.</p>
+          </div>
+          <div class="socials">
+            <a class="social" href="https://www.instagram.com/palocoffee.os/" target="_blank" rel="noopener">
+              <svg class="brand-ic" aria-hidden="true"><use href="#i-ig"/></svg>
+              <span><small>Instagram</small><strong>@palocoffee.os</strong></span>
+              <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="social" href="https://www.facebook.com/p/Palo-Coffee-61584086984071/" target="_blank" rel="noopener">
+              <svg class="brand-ic" aria-hidden="true"><use href="#i-fb"/></svg>
+              <span><small>Facebook</small><strong>Palo Coffee</strong></span>
+              <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© <span id="year">2026</span> Palo Coffee Old Town · 34 Market Lane, Ipoh</span>
+      <nav aria-label="Footer">
+        <a href="#menu">Menu</a>
+        <a href="#visit">Visit</a>
+        <a href="https://www.instagram.com/palocoffee.os/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/p/Palo-Coffee-61584086984071/" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky nav border
+    const nav = document.querySelector('.nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Mobile menu
+    const toggle = document.querySelector('.menu-toggle');
+    const links = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    links.addEventListener('click', e => {
+      if (e.target.closest('a')) { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open menu'); }
+    });
+
+    // Menu tabs (roving tabindex, arrow-key support)
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const select = tab => {
+      tabs.forEach(t => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', on);
+        t.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(t.getAttribute('aria-controls'));
+        panel.hidden = !on;
+        if (on) panel.classList.add('in');
+      });
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('keydown', e => {
+        const dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!dir) return;
+        e.preventDefault();
+        const next = tabs[(i + dir + tabs.length) % tabs.length];
+        next.focus(); select(next);
+      });
+    });
+
+    // Today's hours + open/closed status (Malaysia time, UTC+8)
+    const now = new Date(Date.now() + (new Date().getTimezoneOffset() + 480) * 60000);
+    const day = now.getDay();
+    const row = document.querySelector(`#hours tr[data-day="${day}"]`);
+    if (row) row.classList.add('today');
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const isOpen = day !== 4 && mins >= 540 && mins < 1080;
+    const badge = document.getElementById('status-badge');
+    if (badge) {
+      const dot = badge.querySelector('.dot');
+      const title = badge.querySelector('strong');
+      const sub = badge.querySelector('strong + span');
+      if (isOpen) {
+        title.textContent = 'Open now';
+        sub.textContent = 'Until 6:00pm today';
+      } else {
+        dot.classList.add('closed');
+        title.textContent = 'Closed now';
+        const opensToday = day !== 4 && mins < 540;
+        const nextDay = (day === 3 && mins >= 1080) ? 'Friday' : (day === 4 ? 'Friday' : 'tomorrow');
+        sub.textContent = opensToday ? 'Opens 9:00am today' : `Opens 9:00am ${nextDay}`;
+      }
+    }
+    document.getElementById('year').textContent = now.getFullYear();
+
+    // Scroll reveal
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: .12 }) : null;
+    document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+  </script>
+</body>
+</html>
